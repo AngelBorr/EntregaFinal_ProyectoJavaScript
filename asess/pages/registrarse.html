@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./../style/style.css">
+    <link rel="stylesheet" href="./../style/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <title>Registrarse</title>
+</head>
+<body class="bodyRegistrarse">
+
+    <div>
+        <h1 class="fw-bold text-center py-5">Bienvenidos a Juegos Online.com</h1>
+    </div>
+
+    <div>
+        <h2 class="fw-bold text-center py-5">Registro de Nuevo Usuario</h2>
+    </div>
+
+    <div>
+        <form id="registroUsuario" name="registroUsuario" class=".translate-middle" action="#">
+
+            <div class="mb-4">
+                <label for="" class="form-label">Nombre Completo</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="nombreCompletoUsuario"
+                    id="nombreCompletoUsuario"
+                    placeholder="Ingresa tu Nombre Completo"
+                />
+            </div>
+
+            <div class="mb-4">
+                <label for="" class="form-label">Nombre Usuario</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="nombreUsuario"
+                    id="nombreUsuario"
+                    placeholder="Ingresa tu Usuario"
+                />
+            </div>
+
+            <div class="mb-4">
+            <label for="email" class="form-label">Correo Electronico</label>
+            <input
+                type="email"
+                class="form-control"
+                name="correoEmail"
+                id="correoEmail"
+                placeholder="Ingresa tu correo"
+            />
+            </div>
+
+            <div class="mb-4">
+            <label for="password" class="form-label">Contraseña</label>
+            <input
+                type="password"
+                class="form-control"
+                name="contrasena"
+                id="contrasena"
+                placeholder="Contraseña"
+            />
+            </div>            
+
+            <div class="d-grid">
+            <button type="submit" id="btnCrearUsuario" name="btnCrearUsuario" class="btn btn-primary" onclick="">Crear Usuario</button>
+            </div>
+    </div>
+    
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="./../style/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./../style/style.css">
+    <link rel="stylesheet" href="./../style/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <title>Juegos</title>
+</head>
+<body class="body__pages__juegos">
+    <h1 class="h1">Catalogo de juegos</h1>
+    <form id="formulario_juegos" name="formulario_juegos" class="container-fluid">
+
+        <div class="mb-3">
+            <label for="nombre_juego">Nombre</label>
+            <input id="nombre_juego" name="nombre_juego" type="text">
+        </div>
+
+        <div class="mb-3">
+            <label for="categoria_juego">Categoria</label>
+            <select name="categoria_juego" id="categoria_juego">
+                <option value="-"> - </option>
+                <option value="Accion">Accion</option>
+                <option value="Aventura">Aventura</option>
+                <option value="Arcade">Arcade</option>
+                <option value="Deporte">Deporte</option>
+                <option value="Estrategia">Estrategia</option>
+                <option value="Simulacion">Simulacion</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="precio_juego">Precio</label>
+            <input id="precio_juego" name="precio_juego" type="number">
+        </div>
+
+        <div class="mb-3">
+            <label for="clasificacion_juego">Clasificacion</label>
+            <select name="clasificacion_juego" id="clasificacion_juego">
+                <option value="#"> - </option>
+                <option value="+18"> +18 </option>
+                <option value="-18"> -18 </option>
+            </select>
+        </div>
+        
+        <div class="mb-3">
+            <label for="imgJuego">Imagen</label>
+            <input type="file" name="imgJuego" id="imgJuego">
+        </div>
+
+        <button id="btnAgregarJuego" name="btnAgregarJuego" type="submit" class="btn btn-success" onclick="">Añadir</button>
+
+    </form>
+
+    <table id="tabla_catalogo_juegos" class="tabla__juegos table table-striped table-bordered table-striped">
+        <tr>
+            <th id="tablaId">ID</th>
+            <th id="tablaNombre" name="tablaNombre">NOMBRE</th>
+            <th id="tablaCategoria" name="tablaCategoria">CATEGORIA</th>
+            <th id="tablaPrecio" name="tablaPrecio">PRECIO</th>
+            <th id="tablaClaseficacion" name="tablaClaseficacion">CLASIFICACION</th>            
+        </tr>
+        
+        
+    </table>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="./../style/juegos.js"></script>
+</body>
+</html>

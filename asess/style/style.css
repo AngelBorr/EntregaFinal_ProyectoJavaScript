@@ -1,0 +1,210 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.logo__login{
+    width: 48px;
+}
+
+.logo__facebook{
+    width: 32px;
+}
+
+.logo__google{
+    width: 32px;
+}
+
+/* imagen portada */
+
+.img__portada{
+    width: max-content;
+    height: max-content;
+}
+
+body{
+    background: #2c73d2;
+    background-image: radial-gradient(circle, #4b4b4b, #5d6167, #697a81, #759495, #8aaea1);
+}
+
+.bodyRegistrarse{
+    padding-left: 25%;
+    padding-right: 25%;
+
+}
+
+/* MENU PRINCIPAL */
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+.b-example-divider {
+    height: 3rem;
+    background-color: rgba(0, 0, 0, .1);
+    border: solid rgba(0, 0, 0, .15);
+    border-width: 1px 0;
+    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+}
+
+.b-example-vr {
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 100vh;
+}
+
+.bi {
+    vertical-align: -.125em;
+    fill: currentColor;
+}
+
+.nav-scroller {
+    position: relative;
+    z-index: 2;
+    height: 2.75rem;
+    overflow-y: hidden;
+}
+
+.nav-scroller .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-bottom: 1rem;
+    margin-top: -1px;
+    overflow-x: auto;
+    text-align: center;
+    white-space: nowrap;
+    /*-webkit-overflow-scrolling: touch;*/
+}
+
+/* TARJETAS */
+
+.imgTarjetas{
+    width: 240px;
+    height: 220px;
+}
+
+.cardProduct {
+    width: 300px;
+    border-color: rgb(168, 165, 165);
+    border-style: solid;
+    border-width: 3px;
+    margin: 5px;
+}
+
+.cardProduct__image {
+    width: 100%;
+}
+
+.cardProduct__description {
+    padding: 10px;
+    width: 100%;
+    
+}
+
+.cardProduct__description__price {
+    margin-top: 10px;
+}
+
+.cardProduct__description__text {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    text-align: justify;
+    line-height: 25px;
+}
+
+.cardProduct__description__action {
+    background-color: rgb(80, 135, 238);
+    display: inline-block;
+    width: 40%;
+    padding: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    border-radius: 50px;
+}
+
+.borderRounded {
+    border-radius: 10px;
+}
+
+.btnTarjetas{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 100%;
+}
+
+.btnMandarCarrito{
+    font: bold;
+    color: black;
+    align-content: end;
+    padding-left: 10px;
+}
+
+/* CARRITO */
+
+.imgCarritoCompras{
+    width: 45px;
+    padding-left: 10px;
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+.b-example-divider {
+    height: 3rem;
+    background-color: rgba(0, 0, 0, .1);
+    border: solid rgba(0, 0, 0, .15);
+    border-width: 1px 0;
+    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+}
+
+.b-example-vr {
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 100vh;
+}
+
+.bi {
+    vertical-align: -.125em;
+    fill: currentColor;
+}
+
+.nav-scroller {
+    position: relative;
+    z-index: 2;
+    height: 2.75rem;
+    overflow-y: hidden;
+}
+
+.nav-scroller .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-bottom: 1rem;
+    margin-top: -1px;
+    overflow-x: auto;
+    text-align: center;
+    white-space: nowrap;
+    
+}
