@@ -1,23 +1,26 @@
-// INICIAR SESION - PAGES INDEX//
+const btnIngresoUsuario = document.getElementById("btnIniciarSesion");
 
-// se utiliza localsession para guardar usuario y contraseña para poder dar ingreso a nuevo usuario por no tener base de datos, se intenta hacer con el localstorage y no pude.
+btnIngresoUsuario.addEventListener("click", (e) => {
+    
+    if (e.target.id === "btnIniciarSesion"){
+        accesoUsuario();
+    }
+});
 
-const ingresoUsuario = document.getElementById("btnIniciarSesion");
-
-ingresoUsuario.addEventListener("click", function accesoUsuario() {
+function accesoUsuario() {
 
     const usuarioSession = JSON.parse(sessionStorage.getItem("UsuarioSession"));
 
     const contrasenaSession = JSON.parse(sessionStorage.getItem("ContrasenaSession"));
 
-    
+        
 
     let usuarioEmail = document.getElementById("emailUsuarioRegistrado").value;
 
     let usuarioContrasena = document.getElementById("contrasenaUsuarioRegistrado").value;
 
     if (usuarioSession === usuarioEmail && contrasenaSession === usuarioContrasena) {
-        
+            
         Toastify({
             text: "Bienvenido a JuegosOnline.com!! \n Has Click para redireccionarte a la Pagina Principal",
             duration: 4000,
@@ -61,11 +64,7 @@ ingresoUsuario.addEventListener("click", function accesoUsuario() {
             style: {background: "linear-gradient(to bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);",
             },
         }).showToast();
-                
-        
+                    
+            
     }
-})
-
-
-
-
+};

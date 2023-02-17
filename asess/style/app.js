@@ -1,203 +1,301 @@
+if ((window.location == 'http://127.0.0.1:5501/asess/pages/registrarse.html')) {
+    
+        /* REGISTRO DE USUARIOS - PAGES REGISTRO */
+
+    let listadoDeUsuarios = [];
+
+    const listaDeUsuariosLS = JSON.parse(localStorage.getItem("ListaUsuario"));
+
+    if (listaDeUsuariosLS) {
+        listadoDeUsuarios = listaDeUsuariosLS;
+    }
+
+    class Usuario {
+        constructor(posicion, nombreCompleto, nombreUsuario, email, contrasena) {
+            (this.posicion = posicion),
+            (this.nombreCompleto = nombreCompleto),
+            (this.nombreUsuario = nombreUsuario),
+            (this.email = email),
+            (this.contrasena = contrasena);
+        }
+    }
+
+    // USUARIOS INGRESADOS MANUALMENTE //
+            
+    let usuariosRegistradosManual = [
+
+        new Usuario(1, "Agustin Borrego", "Agus.borr", "agustin.g.borrego@gmail.com", 9876),
+        new Usuario(2, "Tomas Borrego", "TomasGamer", "tomas.borr@gmail.com", 2501),
+        new Usuario(3, "Angel Borrego", "Angelborr", "angel_borr@gmail.com", 12345),
+        new Usuario(4, "Soledad Kopf", "Solekopf", "soledad.kopf@gmail.com", 201286)
+            
+    ]
+            
+    localStorage.setItem("ListaUsuario", JSON.stringify(usuariosRegistradosManual));
+
+    function limpiarCamposFormulario() {
+        const inputNombreCompleto = document.getElementById("nombreCompletoUsuario");
+        const inputNombreUsuario = document.getElementById("nombreUsuario");
+        const inputCorreoEmail = document.getElementById("correoEmail");
+        const inputContrasena = document.getElementById("contrasena");
+
+        inputNombreCompleto.value = "";
+        inputNombreUsuario.value = "";
+        inputCorreoEmail.value = "";
+        inputContrasena.value = "";
+
+    }
+
+    //btnCrearUsuarioNuevo
+
+    function guardarUsuario() {
+
+        function preventDeFaultRegistroUsuario (){
+
+            const formularioRegistrarUsuario = document.getElementById("registroUsuario");
+
+            formularioRegistrarUsuario.addEventListener("submit", function (event) {
+                event.preventDefault();
+            });
+
+        }
+
+        preventDeFaultRegistroUsuario();
+
+        const idUsuarios = JSON.parse(localStorage.getItem("ListaUsuario"));
+            
+
+        let pPosicionCapturar = (idUsuarios.length);
+
+        if (pPosicionCapturar > 0) {
+            pPosicionCapturar++
+        }
+
+        let pNombreCompleto = document.getElementById("nombreCompletoUsuario").value;
+
+        if (pNombreCompleto === "") {
+            Toastify({
+            text: "No has ingresado tu Nombre Completo en el campo indicado ",
+            duration: 4000,
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            //destination: "https://angelborr.github.io/PreEntrega_ProyectoJs/",
+            newWindow: true,
+            close: true,
+            stopOnFocus: true,
+            style: {
+                background:
+                "linear-gradient(to bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);",
+            },
+            }).showToast();
+            return;
+        }
+
+        let pNombreUsuario = document.getElementById("nombreUsuario").value;
+
+        if (pNombreUsuario === "") {
+            Toastify({
+            text: "No has ingresado tu Nombre de Usuario en el campo indicado ",
+            duration: 4000,
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            //destination: "https://angelborr.github.io/PreEntrega_ProyectoJs/",
+            newWindow: true,
+            close: true,
+            stopOnFocus: true,
+            style: {
+                background:
+                "linear-gradient(to bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);",
+            },
+            }).showToast();
+
+            return;
+
+        }
+
+        let pEmail = document.getElementById("correoEmail").value;
+
+        if (pEmail === "") {
+            Toastify({
+            text: "No has ingresado tu E-mail en el campo indicado ",
+            duration: 4000,
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            //destination: "https://angelborr.github.io/PreEntrega_ProyectoJs/",
+            newWindow: true,
+            close: true,
+            stopOnFocus: true,
+            style: {
+                background:
+                "linear-gradient(to bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);",
+            },
+            }).showToast();
+            return;
+        }
+
+        let pContrasena = document.getElementById("contrasena").value;
+
+        if (pContrasena === "") {
+            Toastify({
+            text: "No has ingresado una contraseña en el campo indicado ",
+            duration: 4000,
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            //destination: "https://angelborr.github.io/PreEntrega_ProyectoJs/",
+            newWindow: true,
+            close: true,
+            stopOnFocus: true,
+            style: {
+                background:
+                "linear-gradient(to bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);",
+            },
+            }).showToast();
+            return;
+        }
+
+        const nuevoUsuario = new Usuario( pPosicionCapturar, pNombreCompleto, pNombreUsuario, pEmail, pContrasena);
+        
+        // USUARIOS INGRESADOS POR FORMULARIO //
+
+        listadoDeUsuarios.push(nuevoUsuario);
+
+        localStorage.setItem("ListaUsuario", JSON.stringify(nuevoUsuario));
+
+        sessionStorage.setItem("UsuarioSession", JSON.stringify(pEmail));
+        sessionStorage.setItem("ContrasenaSession", JSON.stringify(pContrasena));
+
+        limpiarCamposFormulario();
+
+        Toastify({
+            text: "Se ha creado exitosamente el registro!! \n Has Click para redireccionarte a la Pagina Principal",
+            duration: 4000,
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            destination: (window.location.assign = "./../../index.html"),
+            newWindow: true,
+            close: true,
+            stopOnFocus: true,
+            style: {
+            background:
+                "linear-gradient(to bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);",
+            },
+        }).showToast();
+
+        // FALTA FUNCION CHEQUEAR QUE EL USUARIO A REGISTRAR NO SE ENCUENTRE YA REGISTRADO //
+    };
+
+    const CrearUsuarioNuevo = document.getElementById("btnCrearUsuario");
+
+    CrearUsuarioNuevo.addEventListener("click", (e) => {
+
+        if (e.target.id === "btnCrearUsuario") {
+            guardarUsuario();
+
+        
+        }
+
+        
+    });
+
+
+}else{
+
+    const btnIngresoUsuario = document.getElementById("btnIniciarSesion");
+
+btnIngresoUsuario.addEventListener("click", (e) => {
+    
+    if (e.target.id === "btnIniciarSesion"){
+        accesoUsuario();
+    }
+});
+
+
+
+function accesoUsuario() {
+
+    const usuarioSession = JSON.parse(sessionStorage.getItem("UsuarioSession"));
+
+    const contrasenaSession = JSON.parse(sessionStorage.getItem("ContrasenaSession"));
+
+        
+
+    let usuarioEmail = document.getElementById("emailUsuarioRegistrado").value;
+
+    let usuarioContrasena = document.getElementById("contrasenaUsuarioRegistrado").value;
+
+    if (usuarioSession === usuarioEmail && contrasenaSession === usuarioContrasena) {
+            
+        Toastify({
+            text: "Bienvenido a JuegosOnline.com!! \n Has Click para redireccionarte a la Pagina Principal",
+            duration: 4000,
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            destination: (window.location.assign = "./asess/pages/principal.html"),
+            newWindow: true,
+            close: true,
+            stopOnFocus: true,
+            style: {
+            background:
+                "linear-gradient(to bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);",
+            },
+        }).showToast();
+
+
+        //no puedo redireccionar con la confirmacion de la igualda de los datos
+
+        //window.location.assign("https://www.w3schools.com")
+
+
+        //window.location.assign(www.google.com.ar)
+
+        //window.location.href = "principal.html"
+
+    } else {
+        Toastify({
+            text: "has ingresado E-mail y/o Contraseña incorrecto, vuelve a intentarlo",
+            duration: 4000,
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            newWindow: true,
+            close: true,
+            stopOnFocus: true,
+            style: {background: "linear-gradient(to bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);",
+            },
+        }).showToast();
+                    
+            
+    }
+
+        
+
+};
+}
+
+
 // INICIAR SESION - PAGES INDEX//
 
-
-
-
-// REGISTRO DE USUARIOS - PAGES REGISTRO//
-
-let listadoDeUsuarios = [];
-
-const listaDeUsuariosLS = JSON.parse(localStorage.getItem("ListaUsuario"));
-
-if (listaDeUsuariosLS) {
-    listadoDeUsuarios = listaDeUsuariosLS;
-}
-
-class Usuario {
-    constructor(posicion, nombreCompleto, nombreUsuario, email, contrasena) {
-        (this.posicion = posicion),
-        (this.nombreCompleto = nombreCompleto),
-        (this.nombreUsuario = nombreUsuario),
-        (this.email = email),
-        (this.contrasena = contrasena);
-    }
-}
-
-// USUARIOS INGRESADOS MANUALMENTE //
-    
-let usuariosRegistradosManual = [
-
-    new Usuario(1, "Agustin Borrego", "Agus.borr", "agustin.g.borrego@gmail.com", 9876),
-    new Usuario(2, "Tomas Borrego", "TomasGamer", "tomas.borr@gmail.com", 2501),
-    new Usuario(3, "Angel Borrego", "Angelborr", "angel_borr@gmail.com", 12345),
-    new Usuario(4, "Soledad Kopf", "Solekopf", "soledad.kopf@gmail.com", 201286)
-    
-]
-    
-localStorage.setItem("ListaUsuario", JSON.stringify(usuariosRegistradosManual));
-
-function limpiarCamposFormulario() {
-    const inputNombreCompleto = document.getElementById("nombreCompletoUsuario");
-    const inputNombreUsuario = document.getElementById("nombreUsuario");
-    const inputCorreoEmail = document.getElementById("correoEmail");
-    const inputContrasena = document.getElementById("contrasena");
-
-    inputNombreCompleto.value = "";
-    inputNombreUsuario.value = "";
-    inputCorreoEmail.value = "";
-    inputContrasena.value = "";
-}
-
-const btnCrearUsuarioNuevo = document.getElementById("btnCrearUsuario");
-
-btnCrearUsuarioNuevo.addEventListener("click", function guardarUsuario() {
-
-    function preventDeFaultRegistroUsuario (){
-
-        const formularioRegistrarUsuario = document.getElementById("registroUsuario");
-
-        formularioRegistrarUsuario.addEventListener("submit", function (event) {
-            event.preventDefault();
-        });
-
-    }
-
-    preventDeFaultRegistroUsuario();
-
-    const idUsuarios = JSON.parse(localStorage.getItem("ListaUsuario"));
-    
-
-    let pPosicionCapturar = (idUsuarios.length);
-
-    if (pPosicionCapturar > 0) {
-        pPosicionCapturar++
-    }
-
-    let pNombreCompleto = document.getElementById("nombreCompletoUsuario").value;
-
-    if (pNombreCompleto === "") {
-        Toastify({
-        text: "No has ingresado tu Nombre Completo en el campo indicado ",
-        duration: 4000,
-        newWindow: true,
-        close: true,
-        gravity: "top", // `top` or `bottom`
-        position: "center", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
-        //destination: "https://angelborr.github.io/PreEntrega_ProyectoJs/",
-        newWindow: true,
-        close: true,
-        stopOnFocus: true,
-        style: {
-            background:
-            "linear-gradient(to bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);",
-        },
-        }).showToast();
-        return;
-    }
-
-    let pNombreUsuario = document.getElementById("nombreUsuario").value;
-
-    if (pNombreUsuario === "") {
-        Toastify({
-        text: "No has ingresado tu Nombre de Usuario en el campo indicado ",
-        duration: 4000,
-        newWindow: true,
-        close: true,
-        gravity: "top", // `top` or `bottom`
-        position: "center", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
-        //destination: "https://angelborr.github.io/PreEntrega_ProyectoJs/",
-        newWindow: true,
-        close: true,
-        stopOnFocus: true,
-        style: {
-            background:
-            "linear-gradient(to bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);",
-        },
-        }).showToast();
-        return;
-    }
-
-    let pEmail = document.getElementById("correoEmail").value;
-
-    if (pEmail === "") {
-        Toastify({
-        text: "No has ingresado tu E-mail en el campo indicado ",
-        duration: 4000,
-        newWindow: true,
-        close: true,
-        gravity: "top", // `top` or `bottom`
-        position: "center", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
-        //destination: "https://angelborr.github.io/PreEntrega_ProyectoJs/",
-        newWindow: true,
-        close: true,
-        stopOnFocus: true,
-        style: {
-            background:
-            "linear-gradient(to bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);",
-        },
-        }).showToast();
-        return;
-    }
-
-    let pContrasena = document.getElementById("contrasena").value;
-
-    if (pContrasena === "") {
-        Toastify({
-        text: "No has ingresado una contraseña en el campo indicado ",
-        duration: 4000,
-        newWindow: true,
-        close: true,
-        gravity: "top", // `top` or `bottom`
-        position: "center", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
-        //destination: "https://angelborr.github.io/PreEntrega_ProyectoJs/",
-        newWindow: true,
-        close: true,
-        stopOnFocus: true,
-        style: {
-            background:
-            "linear-gradient(to bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);",
-        },
-        }).showToast();
-        return;
-    }
-
-    const nuevoUsuario = new Usuario( pPosicionCapturar, pNombreCompleto, pNombreUsuario, pEmail, pContrasena);
-
-    // USUARIOS INGRESADOS POR FORMULARIO //
-
-    listadoDeUsuarios.push(nuevoUsuario);
-
-    localStorage.setItem("ListaUsuario", JSON.stringify(nuevoUsuario));
-
-    sessionStorage.setItem("UsuarioSession", JSON.stringify(pEmail));
-    sessionStorage.setItem("ContrasenaSession", JSON.stringify(pContrasena));
-
-    limpiarCamposFormulario();
-
-    Toastify({
-        text: "Se ha creado exitosamente el registro!! \n Has Click para redireccionarte a la Pagina Principal",
-        duration: 4000,
-        newWindow: true,
-        close: true,
-        gravity: "top", // `top` or `bottom`
-        position: "center", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
-        destination: (window.location.assign = "./../../index.html"),
-        newWindow: true,
-        close: true,
-        stopOnFocus: true,
-        style: {
-        background:
-            "linear-gradient(to bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);",
-        },
-    }).showToast();
-
-    // FALTA FUNCION CHEQUEAR QUE EL USUARIO A REGISTRAR NO SE ENCUENTRE YA REGISTRADO //
-});
+// se utiliza localsession para guardar usuario y contraseña para poder dar ingreso a nuevo usuario por no tener base de datos, se intenta hacer con el localstorage y no pude.
 
 
 
