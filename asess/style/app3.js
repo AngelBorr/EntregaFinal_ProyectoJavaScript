@@ -1,4 +1,4 @@
-const btnIngresoUsuario = document.getElementById("btnIniciarSesion");
+/* const btnIngresoUsuario = document.getElementById("btnIniciarSesion");
 
 btnIngresoUsuario.addEventListener("click", (e) => {
     
@@ -67,4 +67,9 @@ function accesoUsuario() {
                     
             
     }
-};
+}; */
+
+
+
+
+

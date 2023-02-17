@@ -1,4 +1,4 @@
-if ((window.location == 'http://127.0.0.1:5501/asess/pages/registrarse.html')) {
+if (window.location == 'http://127.0.0.1:5501/asess/pages/registrarse.html') {
     
         /* REGISTRO DE USUARIOS - PAGES REGISTRO */
 
@@ -213,27 +213,31 @@ if ((window.location == 'http://127.0.0.1:5501/asess/pages/registrarse.html')) {
     });
 
 
-}else{
+}if(window.location == "http://127.0.0.1:5501/index.html"){
+
+    // INICIAR SESION - PAGES INDEX
+
+    // se utiliza localsession para guardar usuario y contraseña para poder dar ingreso a nuevo usuario por no tener base de datos, se intenta hacer con el localstorage y no pude
 
     const btnIngresoUsuario = document.getElementById("btnIniciarSesion");
 
-btnIngresoUsuario.addEventListener("click", (e) => {
+    btnIngresoUsuario.addEventListener("click", (e) => {
     
-    if (e.target.id === "btnIniciarSesion"){
+        if (e.target.id === "btnIniciarSesion"){
         accesoUsuario();
-    }
-});
+        }
+    });
 
 
 
-function accesoUsuario() {
+    function accesoUsuario() {
 
     const usuarioSession = JSON.parse(sessionStorage.getItem("UsuarioSession"));
 
     const contrasenaSession = JSON.parse(sessionStorage.getItem("ContrasenaSession"));
 
-        
-
+    
+    
     let usuarioEmail = document.getElementById("emailUsuarioRegistrado").value;
 
     let usuarioContrasena = document.getElementById("contrasenaUsuarioRegistrado").value;
@@ -289,20 +293,48 @@ function accesoUsuario() {
 
         
 
-};
+    };
+}if(window.location == 'http://127.0.0.1:5501/asess/pages/principal.html'){
+
+    // PAGINA PRINCIPAL
+
+    function agregarJuegosPaginaPrincipal() {
+
+        const catalogoDeJuegosLS = JSON.parse(localStorage.getItem("catalogoJuegos"))
+
+        for (const juego of catalogoDeJuegosLS) {
+
+        const contenidoPaginaPrincipal = document.getElementById("contenidoPagePrincipal")
+
+        const juegosPaginaPrincipal = document.createElement("div");
+
+        juegosPaginaPrincipal.className = "cardProduct borderRounded h-100 card-group"
+        juegosPaginaPrincipal.innerHTML= `
+
+            <img src="${juego.imagenJuego}" alt="" class="cardProduct__image borderRounded imgTarjetas"/>
+
+            <div class="cardProduct__description">
+                <strong class="cardProduct__description__price" >${juego.precio}</strong>
+                <H6>${juego.nombreJuego}</H6>
+                <p class="cardProduct__description__text">DESCRIPCION JUEGO</p>
+                <p>Posicion Catalogo: ${juego.idJuego}</p>
+                <div class="btnTarjetas">
+                    <a href="./carrito.html" type="button" id="comprarCarrito" class="btn btn-primary">Comprar</a>
+                    <a href="#" id="agredarAlCarrito" name="agredarAlCarrito" class="card-link btnMandarCarrito">Mandar al Carrito</a>            
+                </div>
+            </div>
+        `;
+            
+
+        contenidoPaginaPrincipal.appendChild(juegosPaginaPrincipal)
+
+        }
+        
+    }
+
+    agregarJuegosPaginaPrincipal();
+
 }
-
-
-// INICIAR SESION - PAGES INDEX//
-
-// se utiliza localsession para guardar usuario y contraseña para poder dar ingreso a nuevo usuario por no tener base de datos, se intenta hacer con el localstorage y no pude.
-
-
-
-
-// PAGINA PRINCIPAL //
-
-
 
 
 
@@ -320,73 +352,7 @@ switch (operacion) {
 
     case "administrar":
         
-    window.location.assign("http://127.0.0.1:5501/asess/pages/registroJuegos.html")    
-    
-
-        const actualizaForm = document.getElementById("formulario_juegos");
-
-        actualizaForm.addEventListener("submit", function(event){
-            
-            event.preventDefault()},
-        );
-        
-        class CatalogoGamer{
-                constructor(posicionJuego, nombreJuego, categoria, clasificacion,precio){
-                    this.posicionJuego = posicionJuego
-                    this.nombreJuego = nombreJuego;
-                    this.categoria = categoria;
-                    this.clasificacion = clasificacion;
-                    this.precio = precio;
-                }
-            }
-        
-        /*function capturarJuego(){
-            
-            let posicionJuegoCapturar = ListadoDePlanillaJuegos.length + 1;;
-            let nombreJuegoCapturar = document.getElementById("nombre_juego").value;
-            let categoriaJuegoCapturar = document.getElementById("categoria_juego").value;
-            let clasificacionJuegoCapturar = document.getElementById("clasificacion_juego").value;
-            let precioJuegoCapturar = document.getElementById("precio_juego").value;
-        
-            nuevoJuego = new CatalogoGamer(posicionJuegoCapturar, nombreJuegoCapturar, categoriaJuegoCapturar, clasificacionJuegoCapturar, precioJuegoCapturar);
-            
-            localStorage.setItem("catalogoDeJuegos", JSON.stringify(nuevoJuego))
-
-            ListadoDePlanillaJuegos = JSON.parse(localStorage.getItem("catalogoDeJuegos"))
-
-            agregarJuegoPlanilla(nuevoJuego);
-        
-        }
-        
-        let baseDatosJuegos = [];
-        
-        function agregarJuegoPlanilla(){
-            baseDatosJuegos.push(nuevoJuego);
-            console.log(baseDatosJuegos);
-            document.getElementById("tabla_catalogo_juegos").innerHTML += "<tr><td>" + nuevoJuego.posicionJuego + "</td><td>" + nuevoJuego.nombreJuego + "</td><td>" + nuevoJuego.categoria + "</td><td>" + nuevoJuego.clasificacion + "</td><td>" + nuevoJuego.precio + "</td></tr>";
-        
-        }
-
-        let listaDeJuegos = [
-
-            new CatalogoGamer("0", "God Of War", "accion", "+18", "6000"),
-            new CatalogoGamer("1", "Fifa 2023", "deporte", "-18", "8000"),
-            new CatalogoGamer("2", "Call Of Duty", "accion", "+18", "8000"),
-            new CatalogoGamer("3", "Fall Guys", "simulacion", "-18", "4000"),
-            new CatalogoGamer("4", "Pokemon", "aventura", "-18", "7000"),
-            new CatalogoGamer("5", "Box King Las Vegas", "deporte", "+18", "8000"),
-            new CatalogoGamer("6", "Minecraf", "aventura", "-18", "5000"),
-            new CatalogoGamer("7", "ARK Survival Evolved", "simulacion", "+18", "9000"),
-            new CatalogoGamer("8", "Crash Bandicoot", "aventura", "-18", "9000")
-        
-        
-        ]
-
-        localStorage.setItem("catalogoDeJuegos", JSON.stringify(listaDeJuegos))
-    
-    break;
-
-        // PAGINA PRINCIPAL ///
+        // PAGINA PRINCIPAL
 
     case "comprar":
 
