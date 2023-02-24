@@ -1,4 +1,4 @@
-if (window.location == 'http://127.0.0.1:5501/asess/pages/registrarse.html') {
+if (window.location == 'https://angelborr.github.io/EntregaFinal_ProyectoJavaScript/asess/pages/registrarse.html') {
     
         /* REGISTRO DE USUARIOS - PAGES REGISTRO */
 
@@ -213,7 +213,7 @@ if (window.location == 'http://127.0.0.1:5501/asess/pages/registrarse.html') {
     });
 
 
-}if(window.location == "http://127.0.0.1:5501/index.html"){
+}if(window.location == "https://angelborr.github.io/EntregaFinal_ProyectoJavaScript/index.html"){
 
     // INICIAR SESION - PAGES INDEX
 
@@ -294,7 +294,7 @@ if (window.location == 'http://127.0.0.1:5501/asess/pages/registrarse.html') {
         
 
     };
-}if(window.location == 'http://127.0.0.1:5501/asess/pages/principal.html'){
+}if(window.location == 'https://angelborr.github.io/EntregaFinal_ProyectoJavaScript/asess/pages/principal.html'){
 
     /* PAGINA PRINCIPAL */
 
@@ -413,7 +413,7 @@ if (window.location == 'http://127.0.0.1:5501/asess/pages/registrarse.html') {
         contadorCarrito.innerText = acumuladorCarrito;
     }
 
-}if(window.location == 'http://127.0.0.1:5501/asess/pages/carrito.html'){
+}if(window.location == 'https://angelborr.github.io/EntregaFinal_ProyectoJavaScript/asess/pages/carrito.html'){
 
     /* PAGINA CARRITO */
 
@@ -558,7 +558,7 @@ if (window.location == 'http://127.0.0.1:5501/asess/pages/registrarse.html') {
             alert("Gracias por tu compra!!")
         })
     }
-}else{
+}if(window.location == "https://angelborr.github.io/EntregaFinal_ProyectoJavaScript/asess/pages/registroJuegos.html"){
 
     /* PAGINA REGISTRO JUEGOS */
 
