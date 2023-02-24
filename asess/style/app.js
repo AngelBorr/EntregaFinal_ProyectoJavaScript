@@ -681,11 +681,11 @@ if (window.location == 'https://angelborr.github.io/EntregaFinal_ProyectoJavaScr
 
     const ingresoDeJuegosManual = [
 
-        new CatalogoGamer(1, "God Of War", "accion", "+18", "6000", "./../../../asess/image/imgGodOfWard.jpg"),
-        new CatalogoGamer(2, "Fifa 2023", "deporte", "-18", "8000", "./../../../asess/image/imgFifa2023.jpg"),
+        new CatalogoGamer(1, "God Of War", "accion", "+18", "6000", "./../asess/image/imgGodOfWard.jpg"),
+        new CatalogoGamer(2, "Fifa 2023", "deporte", "-18", "8000", "./../asess/image/imgFifa2023.jpg"),
         new CatalogoGamer(3, "Call Of Duty", "accion", "+18", "8000", "./../../../asess/image/imgCallOfDutyWarzone2.jpg"),
         new CatalogoGamer(4, "Fall Guys", "simulacion", "-18", "4000", "./../../../asess/image/imgFallGuys.jpg"),
-        new CatalogoGamer(5, "Pokemon", "aventura", "-18", "7000", "./../../../asess/image/imgPokemon.jpg"),
+        new CatalogoGamer(5, "Pokemon", "aventura", "-18", "7000", "https://github.com/AngelBorr/EntregaFinal_ProyectoJavaScript/blob/master/asess/image/imgPokemon.jpg"),
         new CatalogoGamer(6, "Box King Las Vegas", "deporte", "+18", "8000", "./../../../asess/image/imgBoxKingVegas.jpg"),
         new CatalogoGamer(7, "Minecraf", "aventura", "-18", "5000", "./../../../asess/image/imgMinecraf.jpg"),
         new CatalogoGamer(8, "ARK Survival Evolved", "simulacion", "+18", "9000", "./../../../asess/image/imgARKsurvival.jpg"),
@@ -883,4 +883,6 @@ if (window.location == 'https://angelborr.github.io/EntregaFinal_ProyectoJavaScr
 }
 
 /* se utiliza api json para generar base de datos juegos (proximamente se generara pedidos.json para gestionar pedidos con base de datos ) */
+
+
 
