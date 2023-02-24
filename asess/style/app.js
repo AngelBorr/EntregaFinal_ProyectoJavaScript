@@ -213,7 +213,7 @@ if (window.location == 'https://angelborr.github.io/EntregaFinal_ProyectoJavaScr
     });
 
 
-}if(window.location == "https://angelborr.github.io/EntregaFinal_ProyectoJavaScript/index.html"){
+}if(window.location == "https://angelborr.github.io/EntregaFinal_ProyectoJavaScript/"){
 
     // INICIAR SESION - PAGES INDEX
 
