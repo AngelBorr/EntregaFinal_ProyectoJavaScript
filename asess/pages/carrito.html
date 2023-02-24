@@ -26,46 +26,42 @@
                 <div class="col-md-5 col-lg-4 order-md-last">
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-primary">Carrito de Compras</span>
-                    <span class="badge bg-primary rounded-pill">3</span>
+                    <span id="contadorPaginaCarrito" class="badge bg-primary rounded-pill">0</span>
                     </h4>
                         <!-- LISTA DEL CARRITO -->
 
                     <ul id="listaCarrito" class="list-group mb-3">
 
-                        <!-- <li class="list-group-item d-flex justify-content-between lh-sm">
-                            <div>
-                            <h6 class="my-0">Producto:</h6>
-                            <small class="text-muted">Nombre del Producto</small>
-                            </div>
-                            <span class="text-muted">$12</span>
-                        </li> -->
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
-                            <div>
-                            <h6 class="my-0">Segundo Producto:</h6>
-                            <small class="text-muted">Nombre del Producto</small>
-                            </div>
-                            <span class="text-muted">$8</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-sm">
-                            <div>
-                            <h6 class="my-0">Tercer Producto</h6>
-                            <small class="text-muted">Nombre del Producto</small>
-                            </div>
-                            <span class="text-muted">$5</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between bg-light">
+                        <!-- SE RELLENA CON JAVASCRIPT -->
+
+                    </ul>
+
+                    <ul class="list-group mb-3">
+                        <li id="codigoPromocion" class="list-group-item d-flex justify-content-between bg-light">
                             <div class="text-success">
-                            <h6 class="my-0">Codigo Promocional</h6>
-                            <small>EXAMPLECODE</small>
+                                <h6 class="my-0">Codigo Promocional</h6>
+                                <small>-</small>
                             </div>
-                            <span class="text-success">−$5</span>
+                            <span class="text-success">−$0</span>
+                        </li>
+                        <li id="descuentos" class="list-group-item d-flex justify-content-between bg-light">
+                            <div class="text-success">
+                                <h6 class="my-0">Descuentos</h6>
+                                <small>-</small>
+                            </div>
+                            <span class="text-success">−$0</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>Iva ($)</span>
+                            <strong id="iva">$0</strong>
                         </li>
                         <li class="list-group-item d-flex justify-content-between">
                             <span>Total ($)</span>
-                            <strong>$20</strong>
+                            <strong id="precioTotal">$0</strong>
                         </li>
-
                     </ul>
+                    
+                    
             
                     <form class="card p-2">
                         <div class="input-group">
@@ -73,6 +69,17 @@
                             <button type="submit" class="btn btn-secondary">Canjear</button>
                         </div>
                     </form>
+
+                    <div class="list-group mb-3 btnFinalizarCompra">
+                        
+                        <button type="button" id="btnFinalizarCompra" class="btn btn-primary">Finalizar Compra</button>
+                        <div id="alertaCompra">
+
+                        </div>
+                                                
+                    </div>
+
+                    
                 </div>
 
                 <div class="col-md-7 col-lg-8">
@@ -158,7 +165,7 @@
                                     Seleccione un país válido.
                                 </div>
                             </div>
-            
+
                             <div class="col-md-4">
                                 <label for="provincias" class="form-label">Provincia</label>
                                 <select class="form-select" id="provincias" required>
@@ -288,8 +295,8 @@
         </footer>
     </div>
     
-    
-    <script src="./../style/app2.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="./../style/app.js"></script>
     
         
 </body>

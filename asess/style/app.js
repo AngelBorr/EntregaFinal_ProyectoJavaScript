@@ -296,265 +296,591 @@ if (window.location == 'http://127.0.0.1:5501/asess/pages/registrarse.html') {
     };
 }if(window.location == 'http://127.0.0.1:5501/asess/pages/principal.html'){
 
-    // PAGINA PRINCIPAL
+    /* PAGINA PRINCIPAL */
 
-    function agregarJuegosPaginaPrincipal() {
+    const catalogoDeJuegosLS = JSON.parse(localStorage.getItem("catalogoJuegos"));
 
-        const catalogoDeJuegosLS = JSON.parse(localStorage.getItem("catalogoJuegos"))
-
-        for (const juego of catalogoDeJuegosLS) {
-
-        const contenidoPaginaPrincipal = document.getElementById("contenidoPagePrincipal")
-
-        const juegosPaginaPrincipal = document.createElement("div");
-
-        juegosPaginaPrincipal.className = "cardProduct borderRounded h-100 card-group"
-        juegosPaginaPrincipal.innerHTML= `
-
-            <img src="${juego.imagenJuego}" alt="" class="cardProduct__image borderRounded imgTarjetas"/>
-
+    const contenidoPaginaPrincipal = document.getElementById("contenidoPagePrincipal");
+    
+    let btnAgregarCarrito = document.querySelectorAll(".btnMandarCarrito");
+    
+    const contadorCarrito = document.getElementById("contadorCarrito");
+    
+    function agregarJuegosCategorias(){
+    
+        const contenidoPaginaPrincipal = document.getElementById("contenidoPagePrincipal");
+    
+        contenidoPaginaPrincipal.innerHTML = ` `;
+    
+        productosElegidos = JSON.parse(localStorage.getItem("catalogoJuegos")); 
+    
+        productosElegidos.forEach(producto => {
+            const contenidoPaginaPrincipal = document.getElementById("contenidoPagePrincipal")
+    
+            const juegosPaginaPrincipal = document.createElement("div");
+    
+            juegosPaginaPrincipal.className = "cardProduct borderRounded h-100 card-group"
+            juegosPaginaPrincipal.innerHTML= `
+    
+            <img src="${producto.imagenJuego}" alt="" class="cardProduct__image borderRounded imgTarjetas"/>
             <div class="cardProduct__description">
-                <strong class="cardProduct__description__price" >${juego.precio}</strong>
-                <H6>${juego.nombreJuego}</H6>
+                <strong class="cardProduct__description__price" >${producto.precio}</strong>
+                <H6>${producto.nombreJuego}</H6>
                 <p class="cardProduct__description__text">DESCRIPCION JUEGO</p>
-                <p>Posicion Catalogo: ${juego.idJuego}</p>
+                <p>Posicion Catalogo: ${producto.idJuego}</p>
+                <p>Categoria: ${producto.categoria}</p>
                 <div class="btnTarjetas">
                     <a href="./carrito.html" type="button" id="comprarCarrito" class="btn btn-primary">Comprar</a>
-                    <a href="#" id="agredarAlCarrito" name="agredarAlCarrito" class="card-link btnMandarCarrito">Mandar al Carrito</a>            
+                    <a href="#" id="${producto.idJuego}" name="agredarAlCarrito" class="card-link btnMandarCarrito">Mandar al Carrito</a>            
                 </div>
             </div>
-        `;
+    
+            `;
+    
+            contenidoPaginaPrincipal.append(juegosPaginaPrincipal)
+        });
+    
+        actualizarBtnAgregarCarrito();
+        
+    };
+    
+    agregarJuegosCategorias();
+    
+    const btnCategorias = document.querySelectorAll(".btnCategorias");
+    
+    btnCategorias.forEach(boton => {
+        boton.addEventListener("click", (e) => {
+    
+            btnCategorias.forEach(boton => boton.classList.remove("active"));
+            e.currentTarget.classList.add("active");
+    
+            if (e.currentTarget.id != "catalogoCompleto") {
+    
+                let productosBtn = catalogoDeJuegosLS.filter(producto => (producto.categoria == e.currentTarget.id));
+    
+                agregarJuegosCategorias(productosBtn); //ver funcion, me actualiza los btn y hace el filtro pero muestra todos los juegos 
+    
+                /* POR CONSOLA ME TOMA EL FILTRO PERO EN LA PAGINA ME SIGUE MOSTRANDO TODO EL CATALOGO */
+    
+                console.log(productosBtn)
+    
+            }else{
+    
+                agregarJuegosCategorias(catalogoDeJuegosLS);
+    
+            }
+    
+        })
+    })
+    
+    function actualizarBtnAgregarCarrito (){
+        btnAgregarCarrito = document.querySelectorAll(".btnMandarCarrito");
+    
+        btnAgregarCarrito.forEach(boton => {
+            boton.addEventListener("click", agregarJuegosAlCarrito)
+        })
+    }
+    
+    const juegosEnCarrito = [];
+    
+    function agregarJuegosAlCarrito (e){
+    
+        const idBoton = e.currentTarget.id;
+    
+        const juegosAgregadosEnCarrito = catalogoDeJuegosLS.find(producto => (producto.idJuego == idBoton));
+    
+        if (juegosEnCarrito.some(producto => (producto.idJuego == idBoton))){
             
-
-        contenidoPaginaPrincipal.appendChild(juegosPaginaPrincipal)
-
+            const index = juegosEnCarrito.findIndex(producto => (producto.idJuego == idBoton));
+            juegosEnCarrito[index].cantidad++;
+    
+        }else{
+    
+            juegosAgregadosEnCarrito.cantidad = 1;
+            juegosEnCarrito.push(juegosAgregadosEnCarrito)
+    
         }
+    
+        
+        actualizarContadorCarrito();
+    
+        localStorage.setItem("Carrito", JSON.stringify(juegosEnCarrito))
+    
+    }
+    
+    function actualizarContadorCarrito(){
+        let acumuladorCarrito = juegosEnCarrito.reduce((acumulado, producto) => acumulado + producto.cantidad, 0);
+        contadorCarrito.innerText = acumuladorCarrito;
+    }
+
+}if(window.location == 'http://127.0.0.1:5501/asess/pages/carrito.html'){
+
+    /* PAGINA CARRITO */
+
+    let carrito;
+
+    const carritoLS = localStorage.getItem("Carrito");
+
+    if (carritoLS) {
+
+        carrito = JSON.parse(carritoLS);
+        
+    } else {
+        carrito = [];
+    }
+
+    let btnEliminarProductoCarrito = document.querySelectorAll(".btnEliminarProducto");
+
+    function actualizarbtnEliminarProductoCarrito (){
+        btnEliminarProductoCarrito = document.querySelectorAll(".btnEliminarProducto");
+
+        btnEliminarProductoCarrito.forEach(boton => {
+            boton.addEventListener("click", eliminarJuegosCarrito)
+        })
+    }
+
+    /* VER FUNCION = ELIMINA EN CONSOLA (NUEVO CARRITO) PERO NO PUEDO APLICARLO EN PANTALLA */
+
+    function eliminarJuegosCarrito(e){
+
+        btnEliminarProductoCarrito = e.currentTarget.id;
+
+        console.log(e)
+
+        const juegoEliminadoCarrito = (JSON.parse(carritoLS)).findIndex(producto => (producto.idJuego == btnEliminarProductoCarrito));
+        
+        const nuevoCarrito = (JSON.parse(carritoLS)).splice(0, juegoEliminadoCarrito);
+
+        console.log(nuevoCarrito);
+
+        agregarJuegosCarrito();
+
+        localStorage.setItem("Carrito", JSON.stringify(nuevoCarrito));
+    }
+
+    function actualizarContadorCarrito(){
+        let carrito = JSON.parse(carritoLS);
+        let acumuladorPaginaCarrito = carrito.reduce((acumulado, producto) => acumulado + producto.cantidad, 0);
+        contadorPaginaCarrito.innerText = acumuladorPaginaCarrito;
+
+    }
+
+    const contadorPaginaCarrito = document.getElementById("contadorPaginaCarrito");
+
+    const codigoPromocion = document.getElementById("codigoPromocion");
+    const descuentos = document.getElementById("descuentos");
+
+    function agregarJuegosCarrito(){
+
+        carrito.forEach(producto => {
+
+            const listaCarrito = document.getElementById("listaCarrito")
+
+            const juegosListaCarrito = document.createElement("li");
+
+            juegosListaCarrito.className = "list-group-item d-flex justify-content-between lh-sm"
+            juegosListaCarrito.innerHTML= `
+
+                <div>
+                    <h6 class="my-0">Producto:</h6>
+                    <small id="nombreProducto" class="text-muted">${producto.nombreJuego}</small>
+                    <div>
+                        <small id="cantidadProducto" class="text-muted">Cantidad: ${producto.cantidad}</small>
+                    </div>
+                    <div>
+                        <small id="precioUnidadProducto" class="text-muted">V. Unidad: $ ${producto.precio}</small>
+                    </div>
+                </div>
+                <div class="contenedorImgCarritoEliminar">
+                    <a href="#" id="${producto.idJuego}" class="btnEliminarProducto"><img src="./../image/btnEliminar1" class="text-muted imgCarritoEliminar" alt=""></a>
+                </div>
+                <div class="contenedorPrecioProducto">
+                    <span id="precioProducto" class="text-muted">$ ${producto.precio * producto.cantidad}</span>
+                </div>
+                        
+            `;
+
+            listaCarrito.append(juegosListaCarrito)
+
+        });
+
+        actualizarContadorCarrito();
+
+        actualizarbtnEliminarProductoCarrito();
+        
+    } 
+
+    agregarJuegosCarrito();
+
+    /* FORMULARIO DE VALORES A PAGAR */
+
+
+
+    function calculosIvaPrecioTotal (){
+
+        let carrito = JSON.parse(localStorage.getItem("Carrito"));
+        console.log (carrito)
+
+        const ivaProductos = document.getElementById("iva");
+        
+        const precioTotal = document.getElementById("precioTotal");
+
+        const resultadoTotal = carrito.reduce((acc, producto) => acc + (producto.precio * producto.cantidad), 0);
+
+        console.log(resultadoTotal);
+
+        precioTotal.innerText=`$${resultadoTotal}`;
+
+        ivaProductos.innerText=`$${(resultadoTotal * 0.21)}`;
+    }
+
+    calculosIvaPrecioTotal ();
+
+    const alertaCompra = document.getElementById("alertaCompra");
+
+    const alert = (message, type) => {
+
+        const divAlerta = document.createElement('div');
+        divAlerta.className = "alert alert-danger";
+        
+        divAlerta.innerHTML = [
+            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+            `   <div>${message}</div>`,
+            '</div>'
+        ].join('');
+
+        alertaCompra.append(divAlerta)
+    }
+
+    const btnAlertaCompra = document.getElementById('btnFinalizarCompra')
+    if (btnAlertaCompra) {
+        btnAlertaCompra.addEventListener('click', () => {
+            alert("Gracias por tu compra!!")
+        })
+    }
+}else{
+
+    /* PAGINA REGISTRO JUEGOS */
+
+    // REGISTRO DE JUEGOS //
+
+    let catalogoDeJuegos = [];
+
+    const catalogoDeJuegosLS = JSON.parse(localStorage.getItem("catalogoJuegos"));
+
+    if (catalogoDeJuegosLS){
+        catalogoDeJuegos = catalogoDeJuegosLS;
+    }
+
+    class CatalogoGamer{
+        constructor(idJuego, nombreJuego, categoria, clasificacion, precio, imagenJuego){
+            this.idJuego = idJuego
+            this.nombreJuego = nombreJuego;
+            this.categoria = categoria;
+            this.clasificacion = clasificacion;
+            this.precio = precio;
+            this.imagenJuego = imagenJuego;
+            
+        }
+        
         
     }
 
-    agregarJuegosPaginaPrincipal();
 
-}
+    function preventDefault(){
+        const actualizaForm = document.getElementById("formulario_juegos");
 
+        actualizaForm.addEventListener("submit", function(event){
+            event.preventDefault()}
+        );
 
+    }
 
-
-
-/* // TODAVIA FALTA APLICAR CODIGO A LA PAGINA, QUEDA COMO EN LA ENTREGA ANTERIOR //
-
-let operacion = prompt("¿Que te deseas hacer? \n - COMPRAR \n - ADMINISTRAR \n (El ingreso es en minuscula)")
-
-console.log(operacion)
-
-switch (operacion) {   
-    
-    // PAGINA CATALOGO JUEGOS //
-
-    case "administrar":
+    function limpiarCamposFormularioJuegos() {
+            const inputNombreJuego = document.getElementById("nombre_juego");
+            const inputCategoriaJuego = document.getElementById("categoria_juego");
+            const inputClasificacionJuego = document.getElementById("precio_juego");
+            const inputPrecioJuego = document.getElementById("clasificacion_juego");
+            const inputImgJuego = document.getElementById("imgJuego");
         
-        // PAGINA PRINCIPAL
+            inputNombreJuego.value = "";
+            inputCategoriaJuego.value = "";
+            inputClasificacionJuego.value = "";
+            inputPrecioJuego.value = "";
+            inputImgJuego.value = "";
 
-    case "comprar":
+    }
 
-    let catalogoSiNo = (prompt("¿Como deseas ver el catalogolo de Juegos? \n Indique la opcion correcta: \n - 1: Catalogo Completo \n - 2: Filtrar los juegos por alguna categoria"))
+    function agregarJuegoPlanilla(){
 
-        switch (catalogoSiNo) {
-            case "1":
-                console.log((JSON.stringify(gamer)))
+        const contenidoTablaJuegos = document.getElementById("tabla_catalogo_juegos");
 
-                alert("Visualiza el Catalogo completo en la Consola")
+        let juegosRegistradosEnPlanilla = [];
 
-                break;
+        const juegosEnLS = JSON.parse(localStorage.getItem("catalogoJuegos"));
 
-            case "2":
+        juegosEnLS.forEach((juegoEnTabla) => {
+            let juegoNuevaFila = document.createElement("tr");
 
-                let eleccionDeCategoria = prompt("Elegi la Categoria por la cual deseas filtrar el catalogo: \n - Accion \n - Aventura \n - Simulacion \n - Deporte")
+            juegoNuevaFila.className ="table-striped";
+            juegoNuevaFila.innerHTML= `
+            
+            <td>${juegoEnTabla.idJuego}</td>
+            <td>${juegoEnTabla.nombreJuego}</td>
+            <td>${juegoEnTabla.categoria}</td>
+            <td>${juegoEnTabla.clasificacion}</td>
+            <td>${juegoEnTabla.precio}</td>
+            
+            `;
+            
+            contenidoTablaJuegos.appendChild(juegoNuevaFila);
+        });
 
-                switch (eleccionDeCategoria) {
+    }
 
-                    case "accion":
-                        const filtrarPorCategoriaAccion = gamer.filter(juego => juego.categoria == "accion");
+    function enviarJuegosAPagesPrincipal(){
 
-                        console.log(JSON.stringify(filtrarPorCategoriaAccion));
-                        alert("el catagolo seleccionado es el siguiente \n " + JSON.stringify(filtrarPorCategoriaAccion))
+        const juegosEnLocalStorage = JSON.parse(localStorage.getItem("catalogoJuegos"));
 
-                        break;
+        juegosEnLocalStorage.forEach((trasladoJuegosPagesPrincipal) => {
+            let contenedor = document.createElement("div");
 
-                    case "aventura":
-                        const filtrarPorCategoriaAventura = gamer.filter(juego => juego.categoria == "aventura");
+            contenedor.innerClassName = "cardProduct borderRounded h-100  card-group"
+            contenedor.innerHTML= `
 
-                        console.log(JSON.stringify(filtrarPorCategoriaAventura));
-                        alert("el catagolo seleccionado es el siguiente \n " + JSON.stringify(filtrarPorCategoriaAventura))
+            <img
+            src="${trasladoJuegosPagesPrincipal.imagenJuego}"
+            alt=""
+            class="cardProduct__image borderRounded imgTarjetas"
+            />
 
-                        break;
+            <div class="cardProduct__description">
+            <strong class="cardProduct__description__price">${trasladoJuegosPagesPrincipal.precio}</strong>
+            <H6>${trasladoJuegosPagesPrincipal.nombreJuego}</H6>
+            <p class="cardProduct__description__text">
+                DESCRIPCION JUEGO
+            </p>
+            <p>Posicion Catalogo: ${trasladoJuegosPagesPrincipal.idJuego}</p>
+            <div class="btnTarjetas">
 
-                    case "simulacion":
-                        const filtrarPorCategoriaSimulacion = gamer.filter(juego => juego.categoria == "simulacion");
+                <a href="./carrito.html" type="button" id="comprarCarrito" class="btn btn-primary">Comprar</a>
+                <a href="#" id="agredarAlCarrito" name="agredarAlCarrito" class="card-link btnMandarCarrito">Mandar al Carrito</a>
+                
+            </div>
+            
+            `;
+            
 
-                        console.log(JSON.stringify(filtrarPorCategoriaSimulacion));
-                        alert("el catagolo seleccionado es el siguiente \n " + JSON.stringify(filtrarPorCategoriaSimulacion))
+            contenidoPagePrincipal.append(contenedor)
 
-                        break;
+            }
+        );
+    }
 
-                    case "deporte":
-                        const filtrarPorCategoriaDeporte = gamer.filter(juego => juego.categoria == "deporte");
+    /// JUEGOS INGRESADOS MANUALMENTE ////
 
-                        console.log(JSON.stringify(filtrarPorCategoriaDeporte));
-                        alert("el catagolo seleccionado es el siguiente \n " + JSON.stringify(filtrarPorCategoriaDeporte))
+    const ingresoDeJuegosManual = [
 
-                        break;
+        new CatalogoGamer(1, "God Of War", "accion", "+18", "6000", "./../../../asess/image/imgGodOfWard.jpg"),
+        new CatalogoGamer(2, "Fifa 2023", "deporte", "-18", "8000", "./../../../asess/image/imgFifa2023.jpg"),
+        new CatalogoGamer(3, "Call Of Duty", "accion", "+18", "8000", "./../../../asess/image/imgCallOfDutyWarzone2.jpg"),
+        new CatalogoGamer(4, "Fall Guys", "simulacion", "-18", "4000", "./../../../asess/image/imgFallGuys.jpg"),
+        new CatalogoGamer(5, "Pokemon", "aventura", "-18", "7000", "./../../../asess/image/imgPokemon.jpg"),
+        new CatalogoGamer(6, "Box King Las Vegas", "deporte", "+18", "8000", "./../../../asess/image/imgBoxKingVegas.jpg"),
+        new CatalogoGamer(7, "Minecraf", "aventura", "-18", "5000", "./../../../asess/image/imgMinecraf.jpg"),
+        new CatalogoGamer(8, "ARK Survival Evolved", "simulacion", "+18", "9000", "./../../../asess/image/imgARKsurvival.jpg"),
+        new CatalogoGamer(9, "Crash Bandicoot", "aventura", "-18", "9000", "./../../../asess/image/imgCrashBandicoot.jpg")
 
-                    default:
-                        alert("No has ingresado una opcion valida")
 
-                }
+    ]
 
-            break;
+    localStorage.setItem("catalogoJuegos", JSON.stringify(ingresoDeJuegosManual));
 
+    agregarJuegoPlanilla();
 
-            default:
+    enviarJuegosAPagesPrincipal();
 
+    const agregarJuegoFormulario = document.getElementById("btnAgregarJuego");
+
+    agregarJuegoFormulario.addEventListener("click", function capturarJuego(){
+
+        preventDefault();
+
+        const idJuego = JSON.parse(localStorage.getItem("catalogoJuegos"));
+
+        let posicionJuegoCapturar = (idJuego.length);
+
+        if (posicionJuegoCapturar > 0) {
+            posicionJuegoCapturar++
         }
+
+        let nombreJuegoCapturar = document.getElementById("nombre_juego").value;
+
+        if (nombreJuegoCapturar === "") {
+            Toastify({
+                text: "No has ingresado el Nombre del Juego en el campo indicado ",
+                duration: 4000,
+                newWindow: true,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "center", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                newWindow: true,
+                close: true,
+                stopOnFocus: true,
+                style: {background: "linear-gradient(to bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);",
+                },
+            }).showToast();
+                
+            return;
+        }
+
+        let categoriaJuegoCapturar = document.getElementById("categoria_juego").value;
+
+        if (categoriaJuegoCapturar === "-") {
+            Toastify({
+                text: "No has ingresado la Categoria del Juego en el campo indicado ",
+                duration: 4000,
+                newWindow: true,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "center", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                newWindow: true,
+                close: true,
+                stopOnFocus: true,
+                style: {
+                    background: "linear-gradient(to bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);",
+                },
+            }).showToast();
+                
+            return;
+        }
+
+        let clasificacionJuegoCapturar = document.getElementById("clasificacion_juego").value;
+
+        if (clasificacionJuegoCapturar === "-") {
+            Toastify({
+                text: "No has ingresado la Clasificacion del Juego en el campo indicado ",
+                duration: 4000,
+                newWindow: true,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "center", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                newWindow: true,
+                close: true,
+                stopOnFocus: true,
+                style: {
+                    background:"linear-gradient(to bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);",
+                },
+            }).showToast();
+                
+            return;
+        }
+
+        let precioJuegoCapturar = document.getElementById("precio_juego").value;
+
+        if (precioJuegoCapturar === "") {
+            Toastify({
+                text: "No has ingresado el Valor del Juego en el campo indicado ",
+                duration: 4000,
+                newWindow: true,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "center", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                newWindow: true,
+                close: true,
+                stopOnFocus: true,
+                style: {
+                    background: "linear-gradient(to bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);",
+                },
+            }).showToast();
+                
+            return;
+        }
+
+        let imagenJuegoCapturar = document.getElementById("imgJuego").value;
+
+        if (imagenJuegoCapturar === "") {
+            Toastify({
+                text: "No has ingresado ninguna Imagen en el campo indicado ",
+                duration: 4000,
+                newWindow: true,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "center", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                newWindow: true,
+                close: true,
+                stopOnFocus: true,
+                style: {
+                    background: "linear-gradient(to bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);",
+                },
+            }).showToast();
+                
+            return;
+        }
+            
+        const nuevoJuego = new CatalogoGamer(posicionJuegoCapturar, nombreJuegoCapturar, categoriaJuegoCapturar, clasificacionJuegoCapturar, precioJuegoCapturar, imagenJuegoCapturar);
+
+        // JUEGOS INGRESADOS POR FORMULARIO ///
+
+        catalogoDeJuegos.push(nuevoJuego);
+
+        console.log(nuevoJuego)
+
+        function agregarJuegoPlanillaDesdeElForm (){
+            const contenidoTablaJuegos = document.getElementById("tabla_catalogo_juegos");
+
+            let juegoNuevaFila = document.createElement("tr");
+
+            juegoNuevaFila.className ="class=table-striped";
+
+            juegoNuevaFila.innerHTML= `
+            
+            <td class="table-striped">${posicionJuegoCapturar}</td>
+            <td class="table-striped">${nombreJuegoCapturar}</td>
+            <td class="table-striped">${categoriaJuegoCapturar}</td>
+            <td class="table-striped">${clasificacionJuegoCapturar}</td>
+            <td class="table-striped">${precioJuegoCapturar}</td>
+            
+            `;
+            /* <img src="${juegoSeleccionado.img}"> */
+
+            contenidoTablaJuegos.append(juegoNuevaFila);
+        }
+
+        agregarJuegoPlanillaDesdeElForm();
+
+        localStorage.setItem("catalogoJuegos", JSON.stringify(catalogoDeJuegos));
+
+        
+
+        /* incorpora nuevo juevo y lo suma pero no muestra en el local storage todos los juegos, si actualizo si lo hace */
+
+        limpiarCamposFormularioJuegos();
+
+        Toastify({
+            text: "Se ha creado exitosamente el registro!! ",
+            duration: 4000,
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            newWindow: true,
+            close: true,
+            stopOnFocus: true,
+            style: {
+                background: "linear-gradient(to bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);",
+            },
+        }).showToast();
+            
+    }
+    );
 }
 
-let eleccionDeJuegoCompra = (prompt("Elegi el juego que deseas comprar (sin puntos,comas y espacios). Ejemplos: \n * minecraft \n * fallguys \n * pokemon"))
-
-let godOfWar = 6000
-let callOfDuty = 8000
-let fifa2023 = 8000
-let fallGuys = 4000
-let pokemon = 7000
-let boxKingLasVegas = 8000
-let survivalHumans = 9000
-let minecraft = 5000
-
-switch (eleccionDeJuegoCompra){
-    case "minecraft":
-        productosFinales = minecraft;
-        alert("el valor es de " + "$" + productosFinales + " " + "+ iva")
-        console.log("Has seleccionado el Juego Minecraft")
-        console.log("El valor es de $ " + productosFinales)                  
-    break;
-
-    case "fallguys":
-        productosFinales = fallGuys;
-        alert("el valor es de " + "$" + productosFinales + " " + "+ iva")
-        console.log("Has seleccionado el Juego Fall Guys")
-        console.log("El valor es de $ " + productosFinales)                     
-    break;
-
-    case "pokemon":
-        productosFinales = pokemon;  
-        alert("el valor es de " + "$" + productosFinales + " " + "+ iva")
-        console.log("Has seleccionado el Juego Pokemon")
-        console.log("El valor es de $ " + productosFinales) 
-    break;
-                    
-    case "godofwar":
-        productosFinales = godOfWar;
-        alert("el valor es de " + "$" + productosFinales + " " + "+ iva")
-        console.log("Has seleccionado el Juego Gog Of War")
-        console.log("El valor es de $ " + productosFinales)                  
-    break;
-
-    case "callofduty":
-        productosFinales = callOfDuty;
-        alert("el valor es de " + "$" + productosFinales + " " + "+ iva")
-        console.log("Has seleccionado el Juego Call Of Duty")
-        console.log("El valor es de $ " + productosFinales) 
-    break;
-
-    case "fifa2023":
-        productosFinales = fifa2023;  
-        alert("el valor es de " + "$" + productosFinales + " " + "+ iva")
-        console.log("Has seleccionado el Juego Fifa 2023")
-        console.log("El valor es de $ " + productosFinales) 
-    break;
-
-    case "boxkinglasvegas":
-        productosFinales = boxKingLasVegas;  
-        alert("el valor es de " + "$" + productosFinales + " " + "+ iva")
-        console.log("Has seleccionado el Juego Box King Las Vegas")
-        console.log("El valor es de $ " + productosFinales) 
-    break;
-
-    case "survivalhumans":
-        productosFinales = survivalHumans;  
-        alert("el valor es de " + "$" + productosFinales + " " + "+ iva")
-        console.log("Has seleccionado el Juego Survival Humans")
-        console.log("El valor es de $ " + productosFinales) 
-    break;
-
-    default:
-    
-}
-
-let iva = productosFinales*0.21
-
-console.log("Iva = $ " + iva)
-            
-let productoFinalConIva = (productosFinales + iva)
-
-console.log("Sub Total = $ " + productoFinalConIva)
-
-alert ("El valor final es de $" + productoFinalConIva + ", aceptar para continuar y pasar a medios de pago")
-
-
-
-do {
-
-    let calcularDescuentoOInt = prompt ("Ingresa el tipo de pago, si paga en efectivo tiene un descuento de $500 y si lo hace con tarjeta de credito va a tener un recargo de $800 \n 1 para pagar en efectivo \n 2 para pagar con tarjeta")
-
-    switch (calcularDescuentoOInt) {
-        case "1":
-            pagoEnfectivo = Number(500);
-            alert("Recibistes un descuento de $" + pagoEnfectivo + " por pago en efectivo")
-            console.log("Medio de pago = Efectivo")
-            console.log("Descuento = $ " + pagoEnfectivo)
-        break;
-
-        case "2":
-            pagoEnTarjeta = Number(800);
-            alert("Recibistes un interes de $" + pagoEnTarjeta + " por pago con Tarjeta de Credito")
-            console.log("Medio de pago = Tarjeta de Credito")
-            console.log("Interes = $ " + pagoEnTarjeta)                
-        break;
-
-        default:
-            alert("no has ingresado la opcion correcta, vuelve a intentarlo")
-                        
-                        
-    }
-
-    switch (calcularDescuentoOInt) {
-        case "1":
-            precioFinalMasDesc = (productoFinalConIva - pagoEnfectivo)
-            alert("el valor final es del juego es de $" + precioFinalMasDesc)
-            console.log("Precio Total = $ " + precioFinalMasDesc)
-            alert("gracias por su compra")
-        break;
-
-        case "2":
-            precioFinalMasInt = (productoFinalConIva + pagoEnTarjeta)
-            alert("el valor final es del juego es de $" + precioFinalMasInt)
-            console.log("Precio Total = $ " + precioFinalMasInt)
-            alert("gracias por su compra")
-        break;
-
-        default:
-                        
-    }
-
-    console.log("gracias por su compra")
-
-}while(confirm = !true){
-
-
-
-
-
-            
-} */
-
-
+/* se utiliza api json para generar base de datos juegos (proximamente se generara pedidos.json para gestionar pedidos con base de datos ) */
 

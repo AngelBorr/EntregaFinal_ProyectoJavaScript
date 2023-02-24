@@ -158,6 +158,27 @@ body{
     padding-left: 10px;
 }
 
+.contenedorImgCarritoEliminar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedorImgCarritoEliminar .imgCarritoEliminar{
+    width: 25px;
+    height: 25px;
+}
+
+.contenedorImgCarritoEliminar .imgCarritoEliminar:hover{
+    cursor: pointer;
+}
+
+.contenedorPrecioProducto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
@@ -208,3 +229,19 @@ body{
     white-space: nowrap;
     
 }
+
+.contadorProductos{
+    width: 25px;
+    height: 25px;
+    background: rgb(235, 133, 54);
+    color: rgb(3, 3, 3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.btnFinalizarCompra{
+    padding-top: 10px;
+}
+

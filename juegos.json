@@ -1,0 +1,76 @@
+{
+  "juegos":[
+      {
+          "idJuego": 1,
+          "nombreJuego": "God Of War",
+          "categoriaJuego": "accion",
+          "clasificacionJuego": "+18",
+          "precioJuego": "6000",
+          "imgJuego": "./../../../asess/image/imgGodOfWard.jpg"
+      },
+      {
+          "idJuego": 2,
+          "nombreJuego": "Fifa 2023",
+          "categoriaJuego": "deporte",
+          "clasificacionJuego": "-18",
+          "precioJuego": "8000",
+          "imgJuego": "./../../../asess/image/imgFifa2023.jpg"
+      },
+      {
+          "idJuego": 3,
+          "nombreJuego": "Call Of Duty",
+          "categoriaJuego": "accion",
+          "clasificacionJuego": "+18",
+          "precioJuego": "8000",
+          "imgJuego": "./../../../asess/image/imgCallOfDutyWarzone2.jpg"
+      },
+      {
+          "idJuego": 4,
+          "nombreJuego": "Fall Guys",
+          "categoriaJuego": "simulacion",
+          "clasificacionJuego": "-18",
+          "precioJuego": "4000",
+          "imgJuego": "./../../../asess/image/imgFallGuys.jpg"
+      },
+      {
+          "idJuego": 5,
+          "nombreJuego": "Pokemon",
+          "categoriaJuego": "aventura",
+          "clasificacionJuego": "-18",
+          "precioJuego": "7000",
+          "imgJuego": "./../../../asess/image/imgPokemon.jpg"
+      },
+      {
+          "idJuego": 6,
+          "nombreJuego": "Box King Las Vegas",
+          "categoriaJuego": "deporte",
+          "clasificacionJuego": "+18",
+          "precioJuego": "8000",
+          "imgJuego": "./../../../asess/image/imgBoxKingVegas.jpg"
+      },
+      {
+          "idJuego": 7,
+          "nombreJuego": "Minecraf",
+          "categoriaJuego": "aventura",
+          "clasificacionJuego": "-18",
+          "precioJuego": "5000",
+          "imgJuego": "./../../../asess/image/imgMinecraf.jpg"
+      },
+      {
+          "idJuego": 8,
+          "nombreJuego": "ARK Survival Evolved",
+          "categoriaJuego": "simulacion",
+          "clasificacionJuego": "+18",
+          "precioJuego": "9000",
+          "imgJuego": "./../../../asess/image/imgARKsurvival.jpg"
+      },
+      {
+          "idJuego": 9,
+          "nombreJuego": "Crash Bandicoot",
+          "categoriaJuego": "aventura",
+          "clasificacionJuego": "-18",
+          "precioJuego": "9000",
+          "imgJuego": "./../../../asess/image/imgCrashBandicoot.jpg"
+      }
+  ]
+}

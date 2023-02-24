@@ -25,20 +25,20 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Catalogo Completo</a>
+                    <a id="catalogoCompleto" class="nav-link active btnCategorias" aria-current="page" href="#">Catalogo Completo</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Accion</a>
+                    <a id="accion" class="nav-link btnCategorias" href="#">Accion</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Aventura</a>
+                    <a id="aventura" class="nav-link btnCategorias" href="#">Aventura</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Deportes</a>
+                    <a id="deporte" class="nav-link btnCategorias" href="#">Deportes</a>
                 </li>
                 <!-- class disabled = selector FALTA ANIMACION DE SELECTOR-->
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Simulacion</a>
+                    <a id="simulacion" class="nav-link btnCategorias" href="#">Simulacion</a>
                 </li>
                 </ul>
                 <form class="d-flex" role="search">
@@ -49,193 +49,21 @@
 
             <!-- CARRITO -->
 
-            <a id="carritoCompras" name="carritoCompras" class="navbar-brand" href=""><img class="imgCarritoCompras" src="./../image/carrito4" alt=""></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            <a id="carritoCompras" name="carritoCompras" class="navbar-brand" href="./carrito.html"><img class="imgCarritoCompras" src="./../image/carrito4" alt=""></a>
+            <button id="btnCarritoCompras" class="navbar-toggler  btnCategorias" type="button" data-bs-toggle="modal" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                
             </button>
+            <span class="contadorProductos rounded-circle border border-danger border-3" id="contadorCarrito">0</span>
         </div>
     </nav>
-    
+
     <!-- TARJETAS JUEGOS -->
 
     <main id="contenidoPagePrincipal" name="contenidoPagePrincipal" class="flexContent d-flex justify-content-around flex-wrap">
-        <!-- <div class="cardProduct borderRounded h-100  card-group">
-            <img
-                src="./../image/imgARKsurvival.jpg"
-                alt=""
-                class="cardProduct__image borderRounded imgTarjetas"
-            />
-            <div class="cardProduct__description">
-                <strong class="cardProduct__description__price">$ 9.000</strong>
-                <H6>ARK Survival Evolved</H6>
-                <p class="cardProduct__description__text">
-                    DESCRIPCION JUEGO
-                </p>
-                
-                <div class="btnTarjetas">
-
-                    <a href="./carrito.html" type="button" id="comprarCarrito" class="btn btn-primary">Comprar</a>
-                    <a href="#" id="agredarAlCarrito" name="agredarAlCarrito" class="card-link btnMandarCarrito">Mandar al Carrito</a>
-                    
-                </div>
-                
-            </div>
-        </div>
-
-        <div class="cardProduct borderRounded h-100 card-group">
-            <img
-                src="./../image/imgBoxKingVegas.jpg"
-                alt=""
-                class="cardProduct__image borderRounded imgTarjetas"
-            />
-            <div class="cardProduct__description">
-                <strong class="cardProduct__description__price">$ 8.000</strong>
-                <H6>Box King Las Vegas</H6>
-                <p class="cardProduct__description__text">
-                    DESCRIPCION DEL JUEGO
-                </p>
-                <div class="btnTarjetas">
-                    <a href="#" class="btn btn-primary">Comprar</a>
-                    <a href="#" id="agredarAlCarrito" name="agredarAlCarrito" class="card-link btnMandarCarrito">Mandar al Carrito</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="cardProduct borderRounded h-100 card-group">
-            <img
-                src="./../image/imgFallGuys.jpg"
-                alt=""
-                class="cardProduct__image borderRounded imgTarjetas"
-            />
-            <div class="cardProduct__description">
-                <strong class="cardProduct__description__price">$ 4.000</strong>
-                <H6>Fall Guys</H6>
-                <p class="cardProduct__description__text">
-                    DESCRIPCION DEL JUEGO
-                </p>
-                <div class="btnTarjetas">
-                    <a href="#" class="btn btn-primary">Comprar</a>
-                    <a href="#" id="anadirCarrito" name="anadirCarrito" class="card-link btnMandarCarrito">Mandar al Carrito</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="cardProduct borderRounded h-100 card-group">
-            <img
-                src="./../image/imgCallOfDutyWarzone2.jpg"
-                alt=""
-                class="cardProduct__image borderRounded imgTarjetas"
-            />
-            <div class="cardProduct__description">
-                <strong class="cardProduct__description__price">$ 8.000</strong>
-                <H6>Call Of Duty "Warzone 2"</H6>
-                <p class="cardProduct__description__text">
-                    DESCRIPCION DEL JUEGO
-                </p>
-                <div class="btnTarjetas">
-                    <a href="#" class="btn btn-primary">Comprar</a>
-                    <a href="#" id="AnadirCarrito" name="AnadirCarrito" class="card-link btnMandarCarrito">Mandar al Carrito</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="cardProduct borderRounded h-100 card-group">
-            <img
-                src="./../image/imgFifa2023.jpg"
-                alt=""
-                class="cardProduct__image borderRounded imgTarjetas"
-            />
-            <div class="cardProduct__description">
-                <strong class="cardProduct__description__price">$ 8.000</strong>
-                <h6>Fifa 2023</h6>
-                <p class="cardProduct__description__text">
-                    DESCRIPCION DEL JUEGO
-                </p>
-                <div class="btnTarjetas">
-                    <a href="#" class="btn btn-primary">Comprar</a>
-                    <a href="#" id="AnadirCarrito" name="AnadirCarrito" class="card-link btnMandarCarrito">Mandar al Carrito</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="cardProduct borderRounded h-100 card-group">
-            <img
-                src="./../image/imgGodOfWard.jpg"
-                alt=""
-                class="cardProduct__image borderRounded imgTarjetas"
-            />
-            <div class="cardProduct__description">
-                <strong class="cardProduct__description__price">$ 6.000</strong>
-                <H6>God Of War 4</H6>
-                <p class="cardProduct__description__text">
-                    DESCRIPCION DEL JUEGO
-                </p>
-                <div class="btnTarjetas">
-                    <a href="#" class="btn btn-primary">Comprar</a>
-                    <a href="#" id="AnadirCarrito" name="AnadirCarrito" class="card-link btnMandarCarrito">Mandar al Carrito</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="cardProduct borderRounded h-100 card-group">
-            <img
-                src="./../image/imgMinecraf.jpg"
-                alt=""
-                class="cardProduct__image borderRounded imgTarjetas"
-            />
-            <div class="cardProduct__description">
-                <strong class="cardProduct__description__price">$ 5.000</strong>
-                <h6>Minecraft</h6>
-                <p class="cardProduct__description__text">
-                    DESCRIPCION DEL JUEGO
-                </p>
-                <div class="btnTarjetas">
-                    <a href="#" class="btn btn-primary">Comprar</a>
-                    <a href="#" id="AnadirCarrito" name="AnadirCarrito" class="card-link btnMandarCarrito">Mandar al Carrito</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="cardProduct borderRounded h-100 card-group">
-            <img
-                src="./../image/imgPokemon.jpg"
-                alt=""
-                class="cardProduct__image borderRounded imgTarjetas"
-            />
-            <div class="cardProduct__description">
-                <strong class="cardProduct__description__price">$ 7.000</strong>
-                <H6>Super Pokemon Rumble</H6>
-                <p class="cardProduct__description__text">
-                    DESCRIPCION DEL JUEGO
-                </p>
-                <div class="btnTarjetas">
-                    <a href="#" class="btn btn-primary">Comprar</a>
-                    <a href="#" id="AnadirCarrito" name="AnadirCarrito" class="card-link btnMandarCarrito">Mandar al Carrito</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="cardProduct borderRounded h-100 card-group">
-            <img
-                src="./../image/imgCrashBandicoot.jpg"
-                alt=""
-                class="cardProduct__image borderRounded imgTarjetas"
-            />
-            <div class="cardProduct__description">
-                <strong class="cardProduct__description__price">$ 9.000</strong>
-                <h6>Crash Bandicoot</h6>
-                <p class="cardProduct__description__text">
-                    DESCRIPCION DEL JUEGO
-                </p>
-                <div class="btnTarjetas">
-                    <a href="#" class="btn btn-primary">Comprar</a>
-                    <a href="#" id="AnadirCarrito" name="AnadirCarrito" class="card-link btnMandarCarrito">Mandar al Carrito</a>
-                </div>
-            </div>
-        </div> -->
+        <div></div>
     </main>
 
-    <div class="modal_container" id="modalContainer"></div>
+    <!-- <div class="modal_container" id="modalContainer"></div> -->
     
 
 
