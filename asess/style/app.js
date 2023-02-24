@@ -683,7 +683,7 @@ if (window.location == 'https://angelborr.github.io/EntregaFinal_ProyectoJavaScr
 
         new CatalogoGamer(1, "God Of War", "accion", "+18", "6000", "./../asess/image/imgGodOfWard.jpg"),
         new CatalogoGamer(2, "Fifa 2023", "deporte", "-18", "8000", "./../asess/image/imgFifa2023.jpg"),
-        new CatalogoGamer(3, "Call Of Duty", "accion", "+18", "8000", "./../../../asess/image/imgCallOfDutyWarzone2.jpg"),
+        new CatalogoGamer(3, "Call Of Duty", "accion", "+18", "8000", "C:\Users\BORREGO`s\Desktop\JavaScript\Ejercicios\loginConBoostraps\asess\image\imgCallOfDutyWarzone2.jpg"),
         new CatalogoGamer(4, "Fall Guys", "simulacion", "-18", "4000", "./../../../asess/image/imgFallGuys.jpg"),
         new CatalogoGamer(5, "Pokemon", "aventura", "-18", "7000", "https://github.com/AngelBorr/EntregaFinal_ProyectoJavaScript/blob/master/asess/image/imgPokemon.jpg"),
         new CatalogoGamer(6, "Box King Las Vegas", "deporte", "+18", "8000", "./../../../asess/image/imgBoxKingVegas.jpg"),
